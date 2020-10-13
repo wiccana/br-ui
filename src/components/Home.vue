@@ -1,17 +1,17 @@
 <template>
-  <CreateDesign/>
+   <CreateDesign/> 
 </template>
 
 <script>
-import CreateDesign from './CreateDesign.vue'
+import CreateDesign from './design/CreateDesign.vue'
 export default {
   name: 'Home',
   // props: {
   //   msg: String
   // },
-  components: {
-    CreateDesign
-  }
+   components: {
+     CreateDesign
+   }
 }
 </script>
 
