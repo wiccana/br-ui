@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "axios": "^0.20.0",
+    "buefy": "^0.9.3",
     "core-js": "^3.6.5",
     "primeflex": "^2.0.0",
     "primeicons": "^4.0.0",
