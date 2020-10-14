@@ -1,7 +1,8 @@
 <template>
   <div>
     categoria seleccionada: {{pCategory}}
-    <Dropdown inputId="selectPType" v-model="selectedType" @change="selectPType" :options="types" optionLabel="title" optionValue="id" placeholder="Tipo" /> 
+    <!-- <input type="text" :value="pCategory" /> -->
+      <v-select :items="types" label="Tipo de Producto"  item-value='id' item-text='title' ></v-select>
   </div>
 </template>
 
@@ -9,33 +10,32 @@
 import axios from 'axios';
 export default {
   name: 'SelectPType',
-    async created() {
-    axios.get("http://localhost:8080/poption/pcategory").then((result) => {
-        let categories = result.data.categories;
-        let filteredCategory = categories.filter(res=>res.id=='box');
-        this.types = filteredCategory[0].ptypes;
-    })
-  },
-  // props: {
-  //   prop-pCategory
-  // }, 
+  props: {
+    pCategory: String
+  }, 
   methods: {
     selectPType (event){
           console.log('selectedPType: ' + event.value);
-        //   this.$emit('setPCategory', event.value.id);
+      },
+      updatePTypes(newPCategory){
+         axios.get("http://localhost:8080/poption/pcategory").then((result) => {
+        let categories = result.data.categories;
+        let filteredCategory = categories.filter(res=>res.id==newPCategory);
+        this.types = filteredCategory[0].ptypes;
+    })
       }
   }, 
     data() {
         return {
-            pCategory: this.category,
             selectedType: null,
             types: []
         }
     },
   watch: { 
-      pCategory: function() { // watch it
-        console.log('change')
+      pCategory: function() {
+        this.updatePTypes(this.pCategory);
       }
-    }
+    } 
+
 }
 </script>
