@@ -1,5 +1,8 @@
 <template>
+  <div>
+    categoria seleccionada: {{pCategory}}
     <Dropdown inputId="selectPType" v-model="selectedType" @change="selectPType" :options="types" optionLabel="title" optionValue="id" placeholder="Tipo" /> 
+  </div>
 </template>
 
 <script>
@@ -9,16 +12,13 @@ export default {
     async created() {
     axios.get("http://localhost:8080/poption/pcategory").then((result) => {
         let categories = result.data.categories;
-        let filteredCategory = categories.filter(res=>res.id==this.pCategory);
+        let filteredCategory = categories.filter(res=>res.id=='box');
         this.types = filteredCategory[0].ptypes;
     })
   },
-  props: {
-    pCategory: { 
-        type: String, 
-        default: 'box'
-    }
-  }, 
+  // props: {
+  //   prop-pCategory
+  // }, 
   methods: {
     selectPType (event){
           console.log('selectedPType: ' + event.value);
@@ -27,14 +27,15 @@ export default {
   }, 
     data() {
         return {
+            pCategory: this.category,
             selectedType: null,
             types: []
         }
     },
-  // watch: { 
-  //     pCategory: function(newVal, oldVal) { // watch it
-  //       console.log('Prop changed: ', newVal, ' | was: ', oldVal)
-  //     }
-  //   }
+  watch: { 
+      pCategory: function() { // watch it
+        console.log('change')
+      }
+    }
 }
 </script>

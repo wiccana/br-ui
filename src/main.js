@@ -1,33 +1,34 @@
-//CSS
-// import Buefy from 'buefy'
-// import 'buefy/dist/buefy.css'
-// Vue.use(Buefy)
+import Vue from 'vue'
+
+// import Vuetify from 'vuetify'
+// import Vuetify from 'vuetify/lib'
+
+import App from './App.vue'
+
+import vuetify from './plugins/vuetify';
+import '@babel/polyfill'
+import 'roboto-fontface/css/roboto/roboto-fontface.css'
+import '@mdi/font/css/materialdesignicons.css'
+
+// import vuetify from './plugins/vuetify';
+// import vuetify from './plugins/vuetify';
 
 //Ajax calls
 // import axios from 'axios'
 // import VueAxios from 'vue-axios'
 
-//CSS Components
-import Button from 'primevue/button'
-import Dropdown from 'primevue/dropdown'
-import InputText from 'primevue/inputtext'
-import Vue from 'vue'
+//CSS
 
-import App from './App.vue'
 
-import 'primeflex/primeflex.css'
-import 'primeicons/primeicons.css'
-import 'primevue/resources/primevue.min.css'
-import 'primevue/resources/themes/saga-blue/theme.css'
-import 'primevue/resources/themes/saga-blue/theme.css'
+// path to vuetify export
 
-Vue.component('InputText', InputText);
-Vue.component('Button', Button);
-Vue.component('Dropdown', Dropdown);
-// Vue.use(VueAxios, axios);
+// Vue.use(Vuetify)
+// Vue.component('v-select', vSelect)
+
 
 Vue.config.productionTip = false
 
 new Vue({
-  render: h => h(App),
+  vuetify,
+  render: h => h(App)
 }).$mount('#app')
