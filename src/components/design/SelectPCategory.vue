@@ -16,8 +16,8 @@ export default {
   },
   methods : {
       selectPCategory (event){
-          console.log('selectedCategory: ' + event.value);
-           //   this.$emit('setPCategory', event.value.id);
+        console.log('selectedCategory: ' + event.value);
+        this.$emit('selected-pcategory', event.value);
       }
   },
    data() {

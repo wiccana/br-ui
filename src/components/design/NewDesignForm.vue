@@ -5,11 +5,11 @@
         <div class="p-d-flex p-flex-column p-flex-md-row">
             <div class="p-mb-2 p-mr-2">
                 <label for="state">Categoría</label>
-                <SelectPCategory/>
+                <SelectPCategory @selected-pcategory="selectPCategory"/>
             </div>
             <div class="p-mb-2 p-mr-2">
                 <label for="state">Tipo</label>
-                <SelectPType/>
+                <SelectPType :pCategory="pCategory"/>
             </div>
             <div class="p-mb-2 p-mr-2">
                 <label for="state">Nombre</label>
@@ -35,21 +35,20 @@ export default {
      SelectPCategory,
      SelectPType,
      SubmitNewDesign
-   }
-//    ,
-//    data () {
-//         return {
-//             pCategory: null,
+   },
+   data () {
+        return {
+            pCategory: null,
 
-//         }
-//     },
-//     methods: {
-//         // Define method that will use the payload to update the data property
-//         setPCategory(selectedPCategory) {
-//             console.log("selectedPCategory: " + selectedPCategory);
-//             // this.pCategory = selectedPCategory;
-//         }
-//     }
+        }
+    },
+    methods: {
+        // Define method that will use the payload to update the data property
+        selectPCategory(pCategory) {
+            console.log("NewFormselectedPCategory: " + pCategory);
+            this.pCategory = pCategory;
+        }
+    }
 
 }
 </script>
