@@ -1,8 +1,6 @@
 <template>
   <div>
-    categoria seleccionada: {{pCategory}}
-    <!-- <input type="text" :value="pCategory" /> -->
-      <v-select :items="types" label="Tipo de Producto"  item-value='id' item-text='title' ></v-select>
+      <v-select :items="types" @change="changePType"  label="Tipo de Producto"  item-value='id' item-text='title' ></v-select>
   </div>
 </template>
 
@@ -22,7 +20,12 @@ export default {
         let categories = result.data.categories;
         let filteredCategory = categories.filter(res=>res.id==newPCategory);
         this.types = filteredCategory[0].ptypes;
-    })
+      })
+    },
+     changePType (newValue){
+        console.log('changePType: ' + newValue);
+        this.selectedType = newValue;
+        this.$emit('pTypeChange', newValue);
       }
   }, 
     data() {

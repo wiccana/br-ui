@@ -7,7 +7,7 @@
               <SelectPCategory @pCategoryChange="setPCategory"/>
           </v-col>
           <v-col cols="12" md="4" >
-            <SelectPType :pCategory="selectedPCategory"/>
+            <SelectPType :pCategory="selectedPCategory" @pTypeChange="setPType"/>
           </v-col>
           <v-col cols="12" md="4">
             <v-text-field v-model="pName" label="Nombre" required></v-text-field>
@@ -35,13 +35,18 @@ export default {
         return {
             valid: true,
             pName: '',
-            selectedPCategory: 'box'
+            selectedPCategory: null,
+            selectedPType: null
         }
     },
     methods: {
         setPCategory(newValue) {
             console.log("NewFormselectedPCategory: " + newValue);
             this.selectedPCategory = newValue;
+        },
+        setPType(newValue) {
+            console.log("NewFormSelectedPType: " + newValue);
+            this.selectedPType = newValue;
         }
     },
 
