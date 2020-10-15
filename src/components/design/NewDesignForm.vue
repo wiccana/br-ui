@@ -27,6 +27,7 @@
 // import axios from 'axios';
 import SelectPCategory from './SelectPCategory.vue'
 import SelectPType from './SelectPType.vue'
+import axios from 'axios';
 export default {
   name: 'NewDesignForm',
    components: {
@@ -55,14 +56,25 @@ export default {
             this.loading= false;
           }
         },
-        submitNewDesign(){
+        async submitNewDesign(){
             console.log("Submit New Design: " + this.selectedPCategory + " - " + 
             this.selectedPType + " - " + this.pName)
-            //   axios.get("http://localhost:8080/poption/pcategory").then((result) => {
-            // let categories = result.data.categories;
-            // this.categories = categories;
-            // console.log(categories);
-    })
+
+            //Define pDesign id
+            let id = this.selectedPCategory + '_' + this.selectedPType + '_' + this.pName.trim().toLowerCase();
+            let title = this.selectedPCategory + '-' + this.selectedPType + '_' + this.pName;
+            let pDesign = {
+              "id" : id, 
+              "title" : title, 
+              "pCategory" : this.selectedPCategory,  
+              "pType" : this.selectedPType };
+              axios.put("http://localhost:8080/pdesign", pDesign).then(result => {
+                console.log(result.data);
+              })
+              .catch(error => {
+                console.log(error);
+              });
+
         }
     },
 
