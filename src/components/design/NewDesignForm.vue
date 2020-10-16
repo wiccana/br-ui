@@ -61,14 +61,14 @@ export default {
             this.selectedPType + " - " + this.pName)
 
             //Define pDesign id
-            let id = this.selectedPCategory + '_' + this.selectedPType + '_' + this.pName.trim().toLowerCase();
+            let id = this.selectedPCategory + '_' + this.selectedPType + '_' + this.toLowerCase().replace(/\s/g, '');;
             let title = this.selectedPCategory + '-' + this.selectedPType + '_' + this.pName;
             let pDesign = {
               "id" : id, 
               "title" : title, 
               "pCategory" : this.selectedPCategory,  
               "pType" : this.selectedPType };
-              axios.put("http://localhost:8080/pdesign", pDesign).then(result => {
+              axios.post("http://localhost:8080/pdesign", pDesign).then(result => {
                 console.log(result.data);
               })
               .catch(error => {
