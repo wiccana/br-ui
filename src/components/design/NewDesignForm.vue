@@ -61,7 +61,7 @@ export default {
             this.selectedPType + " - " + this.pName)
 
             //Define pDesign id
-            let id = this.selectedPCategory + '_' + this.selectedPType + '_' + this.toLowerCase().replace(/\s/g, '');;
+            let id = this.selectedPCategory + '_' + this.selectedPType + '_' + this.pName.trim().toLowerCase().replace(/\s/g, '');
             let title = this.selectedPCategory + '-' + this.selectedPType + '_' + this.pName;
             let pDesign = {
               "id" : id, 
