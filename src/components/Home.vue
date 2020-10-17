@@ -1,16 +1,16 @@
 <template>
-   <CreateDesign/> 
+   <CreateDesignScreen/> 
 </template>
 
 <script>
-import CreateDesign from './design/CreateDesign.vue'
+import CreateDesignScreen from './design/CreateDesignScreen.vue'
 export default {
   name: 'Home',
   // props: {
   //   msg: String
   // },
    components: {
-     CreateDesign
+     CreateDesignScreen
    }
 }
 </script>

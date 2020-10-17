@@ -1,6 +1,8 @@
 <template>
   <div>
       Design Steps by BR
+      Titulo: {{pDesign.title}}
+      
   </div>
   
 </template>
@@ -18,6 +20,9 @@ export default {
 //    created() {
 //       this.checkUnfinished();
 //    },
+    props: {
+        pDesign: Object
+    }
 //    data () {
 //       return {
 //         unfinished: false 

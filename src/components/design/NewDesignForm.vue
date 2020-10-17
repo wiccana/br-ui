@@ -25,8 +25,8 @@
 
 <script>
 // import axios from 'axios';
-import SelectPCategory from './SelectPCategory.vue'
-import SelectPType from './SelectPType.vue'
+import SelectPCategory from './form/SelectPCategory.vue'
+import SelectPType from './form/SelectPType.vue'
 import axios from 'axios';
 export default {
   name: 'NewDesignForm',
@@ -62,14 +62,16 @@ export default {
 
             //Define pDesign id
             let id = this.selectedPCategory + '_' + this.selectedPType + '_' + this.pName.trim().toLowerCase().replace(/\s/g, '');
-            let title = this.selectedPCategory + '-' + this.selectedPType + '_' + this.pName;
+            console.log("pCategory:" + this.selectedPCategory);
+            console.log("pType:" + this.selectedPType);
             let pDesign = {
               "id" : id, 
-              "title" : title, 
-              "pCategory" : this.selectedPCategory,  
-              "pType" : this.selectedPType };
+              "pname" : this.pName, 
+              "pcategory" : this.selectedPCategory,  
+              "ptype" : this.selectedPType };
               axios.post("http://localhost:8080/pdesign", pDesign).then(result => {
                 console.log(result.data);
+                this.$emit('design-created', result.data);
               })
               .catch(error => {
                 console.log(error);

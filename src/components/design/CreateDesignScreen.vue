@@ -1,10 +1,10 @@
 <template>
   <div>
     <div  v-show="showPendingDesign">
-    <DesignSteps/>
+      <DesignSteps :pDesign="pendingDesign"/>
     </div>
     <div v-show="!showPendingDesign">
-      <NewDesignForm/>
+      <NewDesignForm @design-created="showPDesign"/>
     </div>
   </div>
   
@@ -15,7 +15,7 @@ import NewDesignForm from './NewDesignForm.vue'
 import DesignSteps from './DesignSteps.vue'
 import axios from 'axios';
 export default {
-  name: 'CreateDesign',
+  name: 'CreateDesignScreen',
    components: {
      NewDesignForm,
      DesignSteps
@@ -25,7 +25,15 @@ export default {
    },
    data () {
       return {
-        unfinished: false 
+        unfinished: false, 
+        pendingDesign: { "id": "book_coloring_pepitalatrolita",
+                "title": "book-coloring_Pepita la trolita",
+                "description": null,
+                "pCategory": "book",
+                "pType": "coloring",
+                "finished": false,
+                "steps": null
+        }
     }
    },
   computed:{
@@ -45,6 +53,10 @@ export default {
               .catch(error => {
                 console.log(error);
               });
+     },
+     showPDesign(pdesign){
+       this.pendingDesign = pdesign;
+       this.unfinished = true;
      }
    }
  }
