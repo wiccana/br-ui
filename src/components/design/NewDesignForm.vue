@@ -36,7 +36,7 @@ export default {
    },
    data () {
         return {
-            valid: true,
+            valid: false,
             pName: '',
             selectedPCategory: null,
             selectedPType: null,
@@ -57,25 +57,25 @@ export default {
           }
         },
         async submitNewDesign(){
-            console.log("Submit New Design: " + this.selectedPCategory + " - " + 
-            this.selectedPType + " - " + this.pName)
-
-            //Define pDesign id
-            let id = this.selectedPCategory + '_' + this.selectedPType + '_' + this.pName.trim().toLowerCase().replace(/\s/g, '');
-            console.log("pCategory:" + this.selectedPCategory);
-            console.log("pType:" + this.selectedPType);
-            let pDesign = {
-              "id" : id, 
-              "pname" : this.pName, 
-              "pcategory" : this.selectedPCategory,  
-              "ptype" : this.selectedPType };
-              axios.post("http://localhost:8080/pdesign", pDesign).then(result => {
-                console.log(result.data);
-                this.$emit('design-created', result.data);
-              })
-              .catch(error => {
-                console.log(error);
-              });
+            if(this.selectedPCategory.length>0 && this.selectedPType.length && this.pName.length > 0){
+                
+              //Define pDesign id
+              let id = this.selectedPCategory + '_' + this.selectedPType + '_' + this.pName.trim().toLowerCase().replace(/\s/g, '');
+              console.log("pCategory:" + this.selectedPCategory);
+              console.log("pType:" + this.selectedPType);
+              let pDesign = {
+                "id" : id, 
+                "pname" : this.pName, 
+                "pcategory" : this.selectedPCategory,  
+                "ptype" : this.selectedPType };
+                axios.post("http://localhost:8080/pdesign", pDesign).then(result => {
+                  console.log(result.data);
+                  this.$emit('design-created', result.data);
+                })
+                .catch(error => {
+                  console.log(error);
+                });
+            }
 
         }
     },

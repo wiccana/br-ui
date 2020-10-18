@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div  v-show="showPendingDesign">
-      <DesignSteps :pDesign="pendingDesign"/>
+    <div  v-if="showPendingDesign">
+      <DesignWizard :pDesign="pendingDesign"/>
     </div>
-    <div v-show="!showPendingDesign">
+    <div v-if="!showPendingDesign">
       <NewDesignForm @design-created="showPDesign"/>
     </div>
   </div>
@@ -12,13 +12,13 @@
 
 <script>
 import NewDesignForm from './NewDesignForm.vue'
-import DesignSteps from './DesignSteps.vue'
+import DesignWizard from './DesignWizard.vue'
 import axios from 'axios';
 export default {
   name: 'CreateDesignScreen',
    components: {
      NewDesignForm,
-     DesignSteps
+     DesignWizard
    },
    created() {
       this.checkUnfinished();
@@ -26,14 +26,7 @@ export default {
    data () {
       return {
         unfinished: false, 
-        pendingDesign: { "id": "book_coloring_pepitalatrolita",
-                "title": "book-coloring_Pepita la trolita",
-                "description": null,
-                "pCategory": "book",
-                "pType": "coloring",
-                "finished": false,
-                "steps": null
-        }
+        pendingDesign: null
     }
    },
   computed:{
@@ -47,7 +40,8 @@ export default {
           if(result.data.length > 0){
             console.log("unfinished: " + result.data + " length " + result.data.length, " new Form should not be displayed");
               this.unfinished = true;
-              this.showPendingDesign();
+              this.pendingDesign = result.data[0];
+              // this.showPendingDesign();
             }
               })
               .catch(error => {
